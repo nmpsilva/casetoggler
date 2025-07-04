@@ -7,10 +7,14 @@
     <meta name="description" content="Convert text between UPPERCASE, lowercase, camelCase, snake_case, and more. Fast, free, and no ads.">
     
     <!-- Security Headers -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' https://plausible.io;">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-Frame-Options" content="DENY">
     <meta name="referrer" content="no-referrer-when-downgrade">
+
+    <!-- Plausible Analytics - Simple, lightweight, privacy-friendly -->
+    <script defer data-domain="casetoggler.com" src="https://plausible.io/js/script.js"></script>
+
     <style>
         * {
             margin: 0;
@@ -338,6 +342,10 @@
                 
                 if (text && !output.querySelector('.empty-state')) {
                     copyToClipboard(text, e.target);
+                    
+                    if (window.plausible) {
+                        window.plausible('Copy', { props: { case_type: caseKey } });
+                    }
                 }
             }
         });
