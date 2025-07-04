@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://casetoggler.com/sitemap.xml
