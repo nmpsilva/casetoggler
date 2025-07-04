@@ -344,48 +344,6 @@
 
         // Initialize
         initializeCases();
-
-        // Smart ad loading - only after user interaction
-        let adsInitialized = false;
-        
-        function initializeAds() {
-            if (adsInitialized) return;
-            adsInitialized = true;
-            
-            // Create AdSense script
-            const script = document.createElement('script');
-            script.async = true;
-            script.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_PUBLISHER_ID';
-            script.crossOrigin = 'anonymous';
-            document.head.appendChild(script);
-            
-            // Create ad unit
-            script.onload = () => {
-                const adContainer = document.getElementById('ad-container');
-                adContainer.innerHTML = `
-                    <ins class="adsbygoogle"
-                         style="display:block"
-                         data-ad-client="ca-pub-YOUR_PUBLISHER_ID"
-                         data-ad-slot="YOUR_AD_SLOT"
-                         data-ad-format="auto"
-                         data-full-width-responsive="true"></ins>
-                `;
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            };
-        }
-        
-        // Load ads after first interaction or 3 seconds
-        let interactionTimer = setTimeout(initializeAds, 3000);
-        
-        document.addEventListener('click', () => {
-            clearTimeout(interactionTimer);
-            initializeAds();
-        }, { once: true });
-        
-        document.addEventListener('keydown', () => {
-            clearTimeout(interactionTimer);
-            initializeAds();
-        }, { once: true });
     </script>
 </body>
 </html>
